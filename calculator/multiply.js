@@ -1,5 +1,4 @@
-/** @public */
-const DEFAULT_FACTOR = 1;
+const DEFAULT_VALUE = require("./multiplication-identity");
 
 /**
  * @public
@@ -7,14 +6,8 @@ const DEFAULT_FACTOR = 1;
  * @param {number} y
  * @returns {number}
  */
-function multiply(x = DEFAULT_FACTOR, y = DEFAULT_FACTOR) {
+function multiply(x = DEFAULT_VALUE, y = DEFAULT_VALUE) {
   return Number(x) * Number(y);
 }
 
-module.exports = {
-  // the primary entity
-  multiply,
-
-  // the secondary entities (only one in this module)
-  DEFAULT_FACTOR,
-};
+module.exports = multiply;
