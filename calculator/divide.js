@@ -1,4 +1,5 @@
 const DEFAULT_VALUE = require("./multiplication-identity");
+const getConfig = require("./get-config");
 
 /**
  * @public
@@ -7,6 +8,9 @@ const DEFAULT_VALUE = require("./multiplication-identity");
  * @returns {number}
  */
 function divide(x = DEFAULT_VALUE, y = DEFAULT_VALUE) {
+  if (y === 0 && getConfig().errorOnDivideByZero)
+    throw new Error("Division by zero isn't allowed");
+
   return Number(x) / Number(y);
 }
 
