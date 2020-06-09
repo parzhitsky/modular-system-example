@@ -1,4 +1,5 @@
 const DEFAULT_VALUE = require("./summation-identity");
+const getConfig = require("./get-config");
 
 /**
  * @public
@@ -7,7 +8,13 @@ const DEFAULT_VALUE = require("./summation-identity");
  * @returns {number}
  */
 function add(x = DEFAULT_VALUE, y = DEFAULT_VALUE) {
-  return Number(x) + Number(y);
+  const { allowStringConcatenation } = getConfig();
+
+  if (allowStringConcatenation)
+    return x + y;
+
+  else
+    return Number(x) + Number(y);
 }
 
 module.exports = add;
