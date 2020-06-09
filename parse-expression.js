@@ -3,6 +3,8 @@ const subtract = require("./calculator/subtract");
 const multiply = require("./calculator/multiply");
 const divide = require("./calculator/divide");
 
+const getConfig = require("./get-config");
+
 /** @private */
 const operations = {
   "+": add,
@@ -10,6 +12,9 @@ const operations = {
   "*": multiply,
   "/": divide,
 };
+
+if (getConfig().recognizeColonAsDivision)
+  operations[":"] = divide;
 
 /**
  * @private
