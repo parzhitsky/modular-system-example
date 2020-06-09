@@ -1,4 +1,4 @@
-const { add, DEFAULT_SUMMAND } = require("./add");
+const DEFAULT_VALUE = require("./summation-identity");
 
 /**
  * @public
@@ -6,13 +6,8 @@ const { add, DEFAULT_SUMMAND } = require("./add");
  * @param {number} y
  * @returns {number}
  */
-function subtract(x, y = DEFAULT_SUMMAND) {
-  return add(x, -y);
+function subtract(x = DEFAULT_VALUE, y = DEFAULT_VALUE) {
+  return Number(x) - Number(y);
 }
 
-module.exports = {
-  // the primary entity
-  subtract,
-
-  // the secondary entities (none in this module)
-};
+module.exports = subtract;
