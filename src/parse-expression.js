@@ -13,9 +13,6 @@ const operations = {
   "/": divide,
 };
 
-if (getConfig().recognizeColonAsDivision)
-  operations[":"] = divide;
-
 /**
  * @private
  * @param {string} operand
@@ -27,6 +24,21 @@ function parseOperand(operand) {
   } catch {
     return NaN;
   }
+}
+
+/**
+ * @private
+ * @param {string} char
+ * @returns {Function | null}
+ */
+function parseOperation(char) {
+  if (char in operations)
+    return operations[char];
+
+  if (char === ":" && getConfig().recognizeColonAsDivision)
+    return divide;
+
+  return null;
 }
 
 /**
@@ -47,10 +59,10 @@ function parseOperand(operand) {
 function parseExpression(xRaw, operationChar, yRaw) {
   const expression = `${ xRaw } ${ operationChar } ${ yRaw }`;
   const x = parseOperand(xRaw);
-  const operation = operationChar in operations ? operations[operationChar] : null;
   const y = parseOperand(yRaw);
+  const operation = parseOperation(operationChar);
 
-  return { expression, x, operation, y };
+  return { expression, x, y, operation };
 }
 
 module.exports = parseExpression;
